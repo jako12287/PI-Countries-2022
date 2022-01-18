@@ -1,0 +1,137 @@
+import { GETALL, GET_DETAILS, FILTER, FILTERCONT, FILTERACTI, GETACTIVITIES, ORDER, PAGES, PAGEE} from "./types";
+import axios from 'axios';
+
+export const getDetail = (id)=>{
+    return async(dispatch)=>{
+        let get = await axios.get(`http://localhost:3001/countries/${id}`)
+        dispatch({
+            type: GET_DETAILS,
+            payload: get.data
+        })
+    }
+}
+
+export const getCountries = ()=>{
+    return async(dispatch)=>{
+        let get = await axios.get('http://localhost:3001/countries')
+        dispatch({
+            type: GETALL,
+            payload: get.data
+        })
+    }
+}
+
+export const filter = (value)=>{
+    return async(dispatch)=>{
+        let get = await axios.get(`http://localhost:3001/countries?name=${value}`)
+        dispatch({
+            type: FILTER,
+            payload: get.data
+        })
+
+    }
+}
+
+export const filterContinet = (value)=>{
+        value = value.toLowerCase()
+            return async(dispatch)=>{
+                let get = await axios.get('http://localhost:3001/countries')
+                let fill = get.data.filter((el)=>el.continent.toLowerCase() === value)
+                dispatch({
+                    type: FILTERCONT,
+                    payload: fill
+                })
+            }
+        
+}
+
+export const filterActivity = (value)=>{
+    value = value.toLowerCase()
+         return async(dispatch)=>{
+             let get = await axios.get(`http://localhost:3001/activity?name=${value}`)
+             let fill = get.data
+             dispatch({
+                 type: FILTERACTI,
+                 payload : fill
+             })
+         }
+
+}
+
+export const getAllActivities = ()=>{
+    return async(dispatch)=>{
+        let get = await axios.get('http://localhost:3001/activity')
+        let data = get.data
+        dispatch({
+            type: GETACTIVITIES,
+            payload : data
+        })
+    }
+}
+
+export const Order = (value)=>{
+    return (dispatch)=>{
+        dispatch({
+            type: ORDER,
+            payload: value
+        })
+
+    }
+}
+
+export const PageS = (value)=>{
+    return (dispatch)=>{
+        dispatch({
+            type:PAGES,
+            payload: value
+        })
+    }
+}
+export const PageE = (value)=>{
+    return (dispatch)=>{
+        dispatch({
+            type:PAGEE,
+            payload: value
+        })
+    }
+}
+
+export const ActivityPost = async(value)=>{
+    try {
+        
+        let post =await fetch('http://localhost:3001/activity',{
+            method: 'POST',
+            headers: {
+                Accep: 'application/jason',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(value)
+        })
+        return post
+    } catch (err) {
+     console.log('salta este error',err)   
+    }
+    
+}
+
+
+ 
+
+
+// export let getCountries = ()=>{
+//    return(dispatch)=>{
+
+//        axios.get('http://localhost:3001/countries')
+//        .then(result=>result.data)
+//        .then(data=>dispatch({
+//            type: GETALL,
+//            payload:data
+//        }))
+       
+//     }
+
+// }
+
+
+
+
