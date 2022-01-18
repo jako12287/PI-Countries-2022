@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import styles from '../elements_CSS/Countries.module.css'
 import { Country } from './Country'
+import { Loading } from './Loading'
 import { getCountries, getAllActivities } from '../../Countries_store/actions'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -65,7 +66,7 @@ export const Countries = ()=>{
                                           image={el.imageflag}
                                           name={el.name}
                                           continent={el.continent} 
-           ></Country></div>):'loadin.....'}
+           ></Country></div>):<Loading/>}
         </section>
     )
 }
