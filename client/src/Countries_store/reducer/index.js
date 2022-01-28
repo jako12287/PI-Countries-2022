@@ -1,4 +1,6 @@
-import { GETALL, GET_DETAILS, FILTER, FILTERCONT, FILTERACTI, GETACTIVITIES, ORDER, PAGES, PAGEE} from "../actions/types";
+import { GETALL, GET_DETAILS, FILTER, FILTERCONT, 
+         FILTERACTI, GETACTIVITIES, ORDER, PAGES, 
+         PAGEE, MODAL} from "../actions/types";
 
 let initialState = {
     countries:[],
@@ -7,7 +9,8 @@ let initialState = {
     getActivities:[],
     order:'',
     PS:0,
-    PE:10
+    PE:10,
+    modal:false
     
 }
 
@@ -59,6 +62,11 @@ export const reducer = (state = initialState, action)=>{
             return{
                 ...state,
                 PE:action.payload
+            }
+        case MODAL:
+            return{
+                ...state,
+                modal:action.payload
             }
      
 

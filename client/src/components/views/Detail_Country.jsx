@@ -6,12 +6,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getDetail } from '../../Countries_store/actions'
 import { Details } from '../elements/CardDetail'
 import { Footer } from '../views/Footer'
+import { Loading } from '../elements/Loading'
 
 
 export const DetailCountry = ()=>{
     const idP = useParams().id
     const dispatch = useDispatch()
-    const $detail = useSelector((state)=>state.details)
+    let $detail = useSelector((state)=>state.details)
     const Activities = $detail.map(el=>el.activities.map((d)=>{
                                                 return{
                                                          id:d.id,
@@ -42,7 +43,7 @@ export const DetailCountry = ()=>{
 
           <div className={styles.main}>
 
-            {$detail.map((el)=><Details key={el.id}
+            {(!$detail.length)?<Loading/>:$detail.map((el)=><Details key={el.id}
                                         id={el.id} 
                                         name={el.name} 
                                         continent={el.continent} 
@@ -55,9 +56,6 @@ export const DetailCountry = ()=>{
 
                                         />)}
           </div> 
-          <div className={styles.footer}>
-            <Footer/>
-          </div>
         </div>
     )
 }

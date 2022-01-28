@@ -8,7 +8,6 @@ export const Details = ({id, name, continent, image, capital, subregion, area, p
         backgroundPosition: 'center',
         backgroundSize: 'cover'
     }
-    const message = 'there are no activities associated with the country'
     return(
     <div className={styles.container}>
             <div className={styles.title}>{name.toUpperCase()}</div>

@@ -1,4 +1,6 @@
 .container{
+    width: 100vw;
+    height: 100vh;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(3 1fr);
@@ -6,6 +8,7 @@
     "header"
     "main"
     "footer" ;
+    align-items: center;
 }
 .header{
     grid-area: header;
@@ -30,7 +33,7 @@
 .header button:hover{
     background-color: #00000060;
     color: #ffffff;
-    width: 20vw;
+    width: 22vw;
     text-align: center;
     font-weight: bold;
     font-size: .9rem;
@@ -43,13 +46,6 @@
 }
 .main{
     grid-area: main;
-    height: 86.5vh;
 
 
-}
-.footer{
-    grid-area: footer;
-    background-color: #00000050;
-
-  
 }

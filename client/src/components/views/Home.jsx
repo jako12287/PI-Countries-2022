@@ -17,6 +17,7 @@ export const Home = ()=>{
     let $PS = useSelector((state)=>state.PS)
     let $countries = useSelector((state)=>state.countries)
     let $activities = useSelector((state)=>state.getActivities)
+
     const [open, setOpen] = useState({menu:false})
     const [search, setSearch] = useState({
                                           filname:'', 
@@ -35,18 +36,21 @@ export const Home = ()=>{
     }
     const handleSubmit = (e)=>{
         e.preventDefault()
-
-            if(e.target.value){
-                dispatch(filter(search.filname))
-                setSearch((prev)=>({
-                    ...prev,
-                    pageStart:0,
-                    pageEnd: 10
-                }))
-                dispatch(PageS(search.pageStart))
-                dispatch(PageE(search.pageEnd))
-            }
+        
+        if(e.target.value){
+            dispatch(filter(search.filname))
+            setSearch((prev)=>({
+                ...prev,
+                pageStart:0,
+                pageEnd: 10
+            }))
+            dispatch(PageS(search.pageStart))
+            dispatch(PageE(search.pageEnd))
+        }
+        
     }
+
+   
 
     const handleSubmitContinent = (e)=>{
         e.preventDefault()
@@ -132,17 +136,17 @@ export const Home = ()=>{
     let HiddenPageB = ($PS < 1)?true:false
     let HiddenPageN = ($PE >= $countries.length)?true:false
     
-    
     return(
         <article className={styles.container}>
           <section className={styles.header}>
+             <Link className={styles.link}  to='/create_activities'><button className={styles.create}>Create Activities</button></Link>
                 <form className={styles.form}>
                     <input id='inputCountry'type='text' placeholder='🔎 Country...' name='filname' value={search.filname} onChange={handlechange}></input>
                     <input type='submit'value='Search' onClick={handleSubmit}/>
                     <button onClick={handleReset} name='reset' value='reset'>Reset</button>
                 </form>
              
-              <div className={styles.menuQ} className={change}>
+              <div className={change}>
                        <h4>Filter countries for:</h4>
                         <h4>CONTINENT</h4>
                         <select onChange={handlechange} onSubmit={handleSubmitContinent} name='filcontinent' value={search.filcontinent}>
@@ -171,16 +175,16 @@ export const Home = ()=>{
               </div>
 
                 <div className={styles.pg}>{($countries.length)?Math.ceil($PE/10):0} DE {Math.ceil($countries.length/10)}</div>
+
+                <form>
                 <button className={styles.back} disabled={HiddenPageB} value='p-' onClick={handlePage}>{`⇐`}</button>
-                <button className={styles.next} disabled={HiddenPageN} value='p+' onClick={handlePage}>{`⇒`}</button><br/>
+                <button className={styles.next} disabled={HiddenPageN} value='p+' onClick={handlePage}>{`⇒`}</button>
+                </form>
           </section>
           <section className={styles.main}>
 
-             <Link className={styles.link}  to='/create_activities'><button className={styles.create}>Create Activities</button></Link>
              <Countries/>
              <button className={styles.btn_menu} onClick={handleMenu}>
-                 <div></div>
-                 <div></div>
                  <div></div>
              </button>
           </section>

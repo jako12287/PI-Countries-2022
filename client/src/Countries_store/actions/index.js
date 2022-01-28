@@ -1,16 +1,28 @@
-import { GETALL, GET_DETAILS, FILTER, FILTERCONT, FILTERACTI, GETACTIVITIES, ORDER, PAGES, PAGEE} from "./types";
+import { GETALL, GET_DETAILS, FILTER, FILTERCONT, 
+         FILTERACTI, GETACTIVITIES, ORDER, PAGES, 
+         PAGEE, MODAL} from "./types";
 import axios from 'axios';
 
+// export const getDetail = (id)=>{
+//     return async(dispatch)=>{
+//         let get = await axios.get(`http://localhost:3001/countries/${id}`)
+//         dispatch({
+//             type: GET_DETAILS,
+//             payload: get.data
+//         })
+//     }
+// }
+
 export const getDetail = (id)=>{
-    return async(dispatch)=>{
-        let get = await axios.get(`http://localhost:3001/countries/${id}`)
-        dispatch({
-            type: GET_DETAILS,
-            payload: get.data
-        })
+    return(dispatch)=>{
+        axios.get(`http://localhost:3001/countries/${id}`)
+        .then(res=>res.data)
+        .then(data => dispatch({
+            type:GET_DETAILS,
+            payload: data
+        })).catch(e=>console.log(e))
     }
 }
-
 export const getCountries = ()=>{
     return async(dispatch)=>{
         let get = await axios.get('http://localhost:3001/countries')
@@ -20,6 +32,19 @@ export const getCountries = ()=>{
         })
     }
 }
+// export let getCountries = ()=>{
+//    return(dispatch)=>{
+
+//        axios.get('http://localhost:3001/countries')
+//        .then(result=>result.data)
+//        .then(data=>dispatch({
+//            type: GETALL,
+//            payload:data
+//        }))
+       
+//     }
+
+// }
 
 export const filter = (value)=>{
     return async(dispatch)=>{
@@ -109,28 +134,24 @@ export const ActivityPost = async(value)=>{
         })
         return post
     } catch (err) {
-     console.log('salta este error',err)   
+     console.log(err)   
     }
     
 }
+
+export const ModalCreate = (value)=>{
+    return(dispatch)=>{
+        dispatch({
+            type:MODAL,
+            payload: value
+        })
+    }
+} 
 
 
  
 
 
-// export let getCountries = ()=>{
-//    return(dispatch)=>{
-
-//        axios.get('http://localhost:3001/countries')
-//        .then(result=>result.data)
-//        .then(data=>dispatch({
-//            type: GETALL,
-//            payload:data
-//        }))
-       
-//     }
-
-// }
 
 
 

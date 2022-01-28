@@ -8,3 +8,4 @@ export const GETACTIVITIES = 'GETACTIVITIES';
 export const ORDER = 'ORDER';
 export const PAGES = 'PAGES';
 export const PAGEE = 'PAGEE';
+export const MODAL = 'MODAL';

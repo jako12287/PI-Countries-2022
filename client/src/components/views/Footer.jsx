@@ -23,8 +23,8 @@ import logoL from '../../utils/logoL.png'
     return(
         <footer className={styles.container}>
             <h6  className={styles.title}>Created by Johan Cortes</h6>
-           <a href='https://github.com/jako12287'  target='_blank'><div className={styles.logo1} style={style1}></div></a>
-           <a href='https://www.linkedin.com/feed/' target='_blank'><div className={styles.logo2} style={style}></div></a>
+           <a href='https://github.com/jako12287'  rel='noreferrer' target='_blank'><div className={styles.logo1} style={style1}></div></a>
+           <a href='https://www.linkedin.com/in/johancortesdev/' rel='noreferrer' target='_blank'><div className={styles.logo2} style={style}></div></a>
         </footer>
     )
 }

@@ -61,7 +61,7 @@ export const Countries = ()=>{
 
     return(
         <section className={styles.container}>
-           {$countries.length?$countries.sort(order).slice($PS,$PE).map((el)=><div className={styles.layer}><Country key={el.id}
+           {$countries.length?$countries.sort(order).slice($PS,$PE).map((el)=><div className={styles.layer} key={el.id}><Country key={el.id}
                                           id={el.id}
                                           image={el.imageflag}
                                           name={el.name}

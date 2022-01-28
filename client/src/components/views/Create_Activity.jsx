@@ -1,8 +1,9 @@
 import React,{ useEffect, useState} from 'react'
 import styles from '../elements_CSS/Create_Activity.module.css'
+import { Modal } from '../elements/Modal'
 import { Link } from 'react-router-dom'
 import { useDispatch,useSelector } from 'react-redux'
-import { getCountries, ActivityPost, getAllActivities } from '../../Countries_store/actions'
+import { getCountries, ActivityPost, getAllActivities, ModalCreate } from '../../Countries_store/actions'
 
 export const CreateActivity = ()=>{
     let [act, setAct] = useState({
@@ -15,7 +16,7 @@ export const CreateActivity = ()=>{
     const dispatch = useDispatch() 
     let $countries = useSelector((state)=>state.countries)
     let $activities = useSelector((state)=>state.getActivities)
-    
+    let $modal = useSelector((state)=>state.modal)
     
     useEffect(()=>{
         dispatch(getCountries())
@@ -32,7 +33,7 @@ export const CreateActivity = ()=>{
     
     let handleCountries = (e)=>{
         if(act.countryID.includes(e.target.value)){
-            console.log('ya esta en el estado')
+            
         }else{
 
             setAct((prev)=>({
@@ -43,7 +44,6 @@ export const CreateActivity = ()=>{
     }
     let handleClickDelete = (e)=>{
         e.preventDefault()
-        console.log(e.target.name)
         let arr = act.countryID.filter((el)=>el !== e.target.value)
         setAct((prev)=>({
             ...prev,
@@ -68,15 +68,20 @@ export const CreateActivity = ()=>{
                 season:'SPRING',
                 countryID:[]
             }))
-            alert('Activity created whit success')
-
+            dispatch(ModalCreate(true))
+            
         }
-
     }
-   
+    
+    if($modal){
+        return(
+            <Modal/>
+        )
+    }else{
 
-    return(
-        <div className={styles.container}>
+        return(
+            
+            <div className={styles.container}>
         
          <div className={styles.header}>
            <Link className={styles.link} to='/home'><button className={styles.btn_home}>{`⇐ HOME`}</button></Link>
@@ -132,8 +137,8 @@ export const CreateActivity = ()=>{
             <button className={styles.btn_submit} name='create' onClick={handleSubmit}>CREATE</button>
             </form>
          </div>
-         
         </div>
     )
+  }
 }
 
